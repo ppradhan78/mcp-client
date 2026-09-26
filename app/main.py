@@ -83,3 +83,72 @@ async def post_weather(
             status_code=502,
             detail=f"MCP Server error: {str(ex)}"
         )
+
+@app.get("/order")
+async def get_order(
+    orderId: int
+):
+    """
+    Swagger
+        ↓
+    FastAPI
+        ↓
+    MCP Client
+        ↓
+    MCP Server
+        ↓
+    get_order tool
+    """
+
+    try:
+
+        result = await mcp_client.call_tool(
+            "get_order",
+            {
+                 "orderId": orderId
+            }
+        )
+
+        return result
+
+    except Exception as ex:
+
+        raise HTTPException(
+            status_code=502,
+            detail=f"MCP Server error: {str(ex)}"
+        )
+
+@app.get("/product")
+async def get_product(
+    productId   : int
+):
+    """
+    Swagger
+        ↓
+    FastAPI
+        ↓
+    MCP Client
+        ↓
+    MCP Server
+        ↓
+    get_product tool
+    """
+
+    try:
+
+        result = await mcp_client.call_tool(
+            "get_product",
+            {
+                "productId": productId
+            }
+        )
+
+        return result
+
+    except Exception as ex:
+
+        raise HTTPException(
+            status_code=502,
+            detail=f"MCP Server error: {str(ex)}"
+        )
+
